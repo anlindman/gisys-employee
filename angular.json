@@ -102,5 +102,7 @@
       }
     }
   },
-  "defaultProject": "gisys-employee"
+  "cli": {
+    "analytics": "13f08fb3-d882-4c52-8803-d8b63209bbe7"
+  }
 }
