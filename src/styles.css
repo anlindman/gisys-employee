@@ -2,11 +2,20 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
 
-.container{
+.container {
     margin-top:5%;
   }
 
-.fa{
-    font-size: 35px;
+.fa {
+    font-size: 25px;
     margin-top: 5%;
+    margin-bottom: 10%;
+    margin-right: 10px;
+  }
+
+  .border {
+    padding: 10px;
+  }
+  .btn {
+    margin-right: 10px;
   }

@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 export class Employee {
   constructor(
@@ -18,9 +20,12 @@ export class Employee {
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
-  employees: Employee[];
+  // employees: Employee[];
+  closeResult: string;
+  employees: any = [];
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +39,25 @@ export class EmployeeComponent implements OnInit {
         this.employees = response;
       }
     );
+  }
+
+  // NgbModal form functions
+  open(content:any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 }
