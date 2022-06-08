@@ -7,8 +7,8 @@ export class Employee {
   constructor(
     public id: number,
     public employee_name: string,
-    public employee_salary: number,
-    public employee_age: number,
+    public employee_salary: string,
+    public employee_age: string,
     public profile_image: string
   ) {
   }
@@ -22,7 +22,9 @@ export class Employee {
 export class EmployeeComponent implements OnInit {
   // employees: Employee[];
   closeResult: string;
+  id: number;
   employees: any = [];
+  employeeDetails: any = [];
   constructor(
     private httpClient: HttpClient,
     private modalService: NgbModal
@@ -39,6 +41,17 @@ export class EmployeeComponent implements OnInit {
         this.employees = response;
       }
     );
+  }
+
+  getEmployeeDetails(id: any) {
+    this.httpClient.get<any>('http://dummy.restapiexample.com/api/v1/employee/' + id).subscribe(
+      response => {
+        console.log(id);
+        console.log(response);
+        this.id = id;
+        this.employeeDetails = response;
+      }
+    )
   }
 
   // NgbModal form functions
@@ -59,5 +72,18 @@ export class EmployeeComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
+//   openDetails(targetModal: any, employee: Employee) {
+//     this.modalService.open(targetModal, {
+//      centered: true,
+//      backdrop: 'static',
+//      size: 'lg'
+//    });
+//     document.getElementById('name').setAttribute('value', employee.employee_name);
+//     document.getElementById('salary').setAttribute('value', employee.employee_salary);
+//     document.getElementById('age').setAttribute('value', employee.employee_age);
+//     document.getElementById('image').setAttribute('value', employee.profile_image);
+    
+//  }
 
 }
