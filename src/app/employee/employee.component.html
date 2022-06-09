@@ -1,9 +1,5 @@
 <div class="container">
-<p>This is the Employee Component</p>
-</div>
-
-<div class="container">
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped table-hover">
       <thead>
       <tr>
         <th>Id</th>
@@ -12,14 +8,14 @@
       </thead>
       <tbody>
       <tr *ngFor="let employee of employees.data">
-        <td><span>{{employee.id}}</span></td>
+        <td><span class="table-content">{{employee.id}}</span></td>
         <td><span>{{employee.employee_name}}</span></td>
-        <td><button class="btn btn-md btn-outline-primary" mat-raised-button
+        <!-- <td><button class="btn btn-md btn-outline-primary" mat-raised-button
                     (click)="getEmployeeDetails(employee.id)">
             <i class="fa fa-search"></i>Info</button>
-        </td>
+        </td> -->
         <td><button class="btn btn-md btn-outline-primary" mat-raised-button
-                    (click)="open(content)">
+                    (click)="open(content, employee.id)">
             <i class="fa fa-search"></i>Test</button>
         </td>
       </tr>
@@ -31,11 +27,12 @@
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Employee details</h4>
     </div>
+
     <div class="modal-body">
-        <form>
+        <form #f="ngForm">
             <div class="form-group">
               <label for="name">Name</label>
-              <p>Test name</p>
+              <input class="form-control" type="text" readonly name="employee_name" [ngModel]="employeeDetails.employee_name">
               </div>
             
             <div class="form-group">
@@ -49,8 +46,9 @@
             </div>
             
             <div class="form-group">
-              <label>Profile image</label>
+              <label for="image">Profile image</label>
               <p>Test image</p>
+              <img src="employeeDetails.image">
             </div>
           </form>
     </div>

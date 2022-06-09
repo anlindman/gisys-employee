@@ -2,17 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-
-// export class Employee {
-//   constructor(
-//     public id: number,
-//     public employee_name: string,
-//     public employee_salary: string,
-//     public employee_age: string,
-//     public profile_image: string
-//   ) {
-//   }
-// }
+export class Employee {
+  constructor(
+    public id: number,
+    public employee_name: string,
+    public employee_salary: string,
+    public employee_age: string,
+    public profile_image: string
+  ) {
+  }
+}
 
 @Component({
   selector: 'app-employee',
@@ -25,6 +24,7 @@ export class EmployeeComponent implements OnInit {
   id: number;
   employees: any = [];
   employeeDetails: any = [];
+  model: Employee;
   constructor(
     private httpClient: HttpClient,
     private modalService: NgbModal
@@ -44,19 +44,43 @@ export class EmployeeComponent implements OnInit {
   }
 
   getEmployeeDetails(id: any) {
-    this.httpClient.get<any>('http://dummy.restapiexample.com/api/v1/employee/' + id).subscribe(
-      response => {
+    this.httpClient.get<Employee>('http://dummy.restapiexample.com/api/v1/employee/' + id).subscribe(
+      employeeDetails => {
         console.log("Selected id: " + id);
-        console.log(response);
+        console.log(employeeDetails);
         this.id = id;
-        this.employeeDetails = response;
+        this.employeeDetails = employeeDetails;
+        // this.model = new Employee(
+        //   employeeDetails.id,
+        //   employeeDetails.employee_name,
+        //   employeeDetails.employee_salary,
+        //   employeeDetails.employee_age,
+        //   employeeDetails.profile_image
+        // );
         
       }
     )
   }
 
   // NgbModal functions
-  open(content:any) {
+  open(content:any, id: any) {
+    console.log("popup loaded");
+    this.httpClient.get<any>('http://dummy.restapiexample.com/api/v1/employee/' + id).subscribe(
+      response => {
+        console.log("Selected id: " + id);
+        this.id = id;
+        this.employeeDetails = response.data;
+        console.log(this.employeeDetails);
+        this.model = new Employee(
+          this.employeeDetails.id,
+          this.employeeDetails.employee_name,
+          this.employeeDetails.employee_salary,
+          this.employeeDetails.employee_age,
+          this.employeeDetails.profile_image
+        );
+        console.log(this.model);
+      }
+    )
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
