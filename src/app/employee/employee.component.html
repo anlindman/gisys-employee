@@ -10,11 +10,8 @@
       <tr *ngFor="let employee of employees.data">
         <td><span class="table-content">{{employee.id}}</span></td>
         <td><span>{{employee.employee_name}}</span></td>
-        <!-- <td><button class="btn btn-md btn-outline-primary" mat-raised-button
-                    (click)="getEmployeeDetails(employee.id)">
-            <i class="fa fa-search"></i>Info</button>
-        </td> -->
-        <td><button class="btn btn-md btn-outline-primary" mat-raised-button
+        <td style="text-align:center; max-width: 50px;">
+          <button class="btn btn-md btn-outline-success" mat-raised-button
                     (click)="open(content, employee.id)">
             <i class="fa fa-search"></i>Info</button>
         </td>
@@ -31,28 +28,29 @@
     <div class="modal-body">
         <form #f="ngForm">
             <div class="form-group">
-              <label for="name">Namn</label>
+              <label style="padding-bottom: 1rem; padding-top: 1rem; font-size: large;" for="name">Namn</label>
               <input class="form-control" type="text" readonly name="employee_name" [ngModel]="employeeDetails.employee_name">
               </div>
             
             <div class="form-group">
-              <label for="salary">Lön</label>
+              <label style="padding-bottom: 1rem; padding-top: 1rem; font-size: large;" for="salary">Lön</label>
               <input class="form-control" type="text" readonly name="employee_salary" [ngModel]="employeeDetails.employee_salary">
             </div>
             
             <div class="form-group">
-              <label for="age">Ålder</label>
+              <label style="padding-bottom: 1rem; padding-top: 1rem; font-size: large;" for="age">Ålder</label>
               <input class="form-control" type="text" readonly name="employee_age" [ngModel]="employeeDetails.employee_age">
             </div>
             
             <div class="form-group">
-              <label for="image">Profilbild</label>
+              <label style="padding-bottom: 1rem; padding-top: 1rem; font-size: large;" for="image">Profilbild</label>
               <br>
               <img style="max-width: 200px; 
                           border: 1px solid rgb(0, 0, 0); 
                           margin-left: 5px;
                           margin-top: 5px;
-                          text-align: center;" 
+                          text-align: center;
+                          padding-bottom: 2rem" 
                     [src]="employeeDetails.image || './assets/img/dummy-profile-pic.png'" />
             </div>
           </form>

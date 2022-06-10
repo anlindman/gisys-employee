@@ -18,8 +18,8 @@ export class Employee {
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css']
 })
+
 export class EmployeeComponent implements OnInit {
-  // employees: Employee[];
   closeResult: string;
   id: number;
   employees: any = [];
@@ -50,21 +50,13 @@ export class EmployeeComponent implements OnInit {
         console.log(employeeDetails);
         this.id = id;
         this.employeeDetails = employeeDetails;
-        // this.model = new Employee(
-        //   employeeDetails.id,
-        //   employeeDetails.employee_name,
-        //   employeeDetails.employee_salary,
-        //   employeeDetails.employee_age,
-        //   employeeDetails.profile_image
-        // );
-        
       }
-    )
+    );
   }
 
   // NgbModal functions
   open(content:any, id: any) {
-    console.log("popup loaded");
+    console.log("Popup loaded");
     this.httpClient.get<any>('http://dummy.restapiexample.com/api/v1/employee/' + id).subscribe(
       response => {
         console.log("Selected id: " + id);
@@ -97,19 +89,4 @@ export class EmployeeComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
-  openDetails(targetModal: any, id: any) {
-    
-    this.modalService.open(targetModal, {
-     centered: true,
-     backdrop: 'static',
-     size: 'lg'
-   });
-    // document.getElementById('name').setAttribute('value', employee.employee_name);
-    // document.getElementById('salary').setAttribute('value', employee.employee_salary);
-    // document.getElementById('age').setAttribute('value', employee.employee_age);
-    // document.getElementById('image').setAttribute('value', employee.profile_image);
-    
- }
-
 }

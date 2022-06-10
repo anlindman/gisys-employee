@@ -19,7 +19,7 @@
 
 .btn {
     margin-right: 10px;
-    
+
   }
   
 .table {
@@ -33,5 +33,11 @@
 
 .label {
   padding-bottom: 2px;
+}
+
+.preamble {
+  /* font-style: oblique; */
+  font-weight: bold;
+  font-size: large;
 }
   
